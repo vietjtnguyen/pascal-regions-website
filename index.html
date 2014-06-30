@@ -44,7 +44,7 @@
 
     <a name="introduction"></a>
     <div class="page-header"><h1 id="pascal-regions-dataset">PASCAL Regions Dataset</h1></div>
-    <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond both object detection bounding boxes and object segmentation by providing whole scene semantic segmentation. This boils down to a per-pixel class label. The <a href="#statistics">statistics section</a> has a full list of labels.</p>
+    <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond the original PASCAL semantic segmentation task by providing annotations for the whole scene. This boils down to a per-pixel class label. The <a href="#statistics">statistics section</a> has a full list of labels.</p>
     <p>Below are some example segmentations from the dataset.</p>
     <div class="row">
       <div class="col-md-4">
@@ -112,8 +112,8 @@
 
     <a name="statistics"></a>
     <div class="page-header"><h2 id="statistics">Statistics</h2></div>
-    <p>Since the dataset is an annotation of PASCAL VOC 2010 it shares the same set numbers. <code>trainval</code> contains 9,637 images while <code>test</code> contains 10,417 images.</p>
-    <p>Click on the panel below to expand the full class list. The following image count and average area are calculated only over the training and validation set. When the testing set is released these numbers will be updated.</p>
+    <p>Since the dataset is an annotation of PASCAL VOC 2010 it shares the same set numbers. Training and validation contains 9,637 images while testing contains 10,417 images.</p>
+    <p>Click on the panel below to expand the full class list. The following image count and average area are calculated only over the training and validation set. When the testing set is released these numbers will be updated. Image counts below may be zero because a class was present in the testing set but not the training and validation set.</p>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -593,9 +593,7 @@
 
     <a name="considerations"></a>
     <div class="page-header"><h2 id="usage-considerations">Usage Considerations</h2></div>
-    <p>This annotation set is <strong>not</strong> like other object segmentation datasets where there exists a clear foreground object(s) and a segmentation for <em>just</em> the foreground object(s) are available.</p>
     <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is. The annotation also only specifies a single class per pixel. It also does not specify instance or part labels.</p>
-    <p>This leads to some interesting ambiguities and post-processing. For example, the clothes on a person are not labeled <code>cloth</code> but rather labeled <code>person</code>.</p>
     <p>When using this dataset it is important that you examine classes to ensure they match your intended use. For example, <code>sand</code> is often labeled independently despite also being considered <code>ground</code>. Those interested in <code>ground</code> may want to cluster <code>sand</code> and <code>ground</code> together along with other classes.
     <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p> 
 
@@ -606,12 +604,13 @@
         <div class="media">
           <a class="pull-left text-center" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a>
           <div class="media-body">
-            <h3 id="the-role-of-context-for-object-detection-and-semantic-segmentation-in-the-wild">The Role of Context for Object Detection and Semantic Segmentation in the Wild</h3>
+            <h3>"The Role of Context for Object Detection and Semantic Segmentation in the Wild"</h3>
             <p>Roozbeh Mottaghi, Xianjie Chen, Xiaobai Liu, Nam-Gyu Cho, Seong-Whan Lee, Sanja Fidler, Raquel Urtasun, Alan Yuille</p>
+            <p>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2014</a>
           </div>
         </div>
       </li>
-      <li class="list-group-item">
+      <!--li class="list-group-item">
         <div class="media">
           <a class="pull-left text-center" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a>
           <div class="media-body">
@@ -619,7 +618,7 @@
             <p>Illustrious Author One, Person Who Did Lots of Work, Another Person Who Did Lots of Work, Professors Who Need Political Satiation, The Almighty Advisor</p>
           </div>
         </div>
-      </li>
+      </li-->
     </ul>
     <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
 
