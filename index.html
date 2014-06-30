@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>PASCAL Regions Dataset</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <style>
+    /* http://stackoverflow.com/questions/18325779/bootstrap-3-collapse-show-state-with-chevron-icon */
+    .panel-heading .accordion-toggle:before {
+      font-family: 'Glyphicons Halflings';
+      content: "\e114";
+      float: left;
+      color: grey;
+      padding-right: 6px;
+    }
+    .panel-heading .accordion-toggle.collapsed:before {
+      content: "\e080";
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="#statistics">Statistics</a></li>
+        <li><a href="#considerations">Usage Considerations</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <a name="introduction"></a>
+    <div class="page-header"><h1 id="pascal-regions-dataset">PASCAL Regions Dataset</h1></div>
+    <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond both object detection bounding boxes and object segmentation by providing whole scene semantic segmentation. This boils down to a per-pixel class label. The <a href="#statistics">statistics section</a> has a full list of labels.</p>
+    <p>Below are some example segmentations from the dataset.</p>
+    <div class="row">
+      <div class="col-md-4">
+        <span href="#" class="thumbnail">
+          <img src="2008_001997.jpg">
+          <img src="2008_001997L.png">
+        </span>
+      </div>
+      <div class="col-md-4">
+        <span href="#" class="thumbnail">
+          <img src="2008_002026.jpg">
+          <img src="2008_002026L.png">
+        </span>
+      </div>
+      <div class="col-md-4">
+        <span href="#" class="thumbnail">
+          <img src="2008_002123.jpg">
+          <img src="2008_002123L.png">
+        </span>
+      </div>
+    </div>
+    <p>Below are some example class masks.</p>
+    <div class="row">
+      <div class="col-md-4">
+        <span href="#" class="thumbnail text-center">
+          <img src="computer-2008_007324-2.png">
+          <div class="caption"><code>computer</code></div>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <span href="#" class="thumbnail text-center">
+          <img src="sofa-2008_002092-3.png">
+          <div class="caption"><code>sofa</code></div>
+        </span>
+      </div>
+      <div class="col-md-4">
+        <span href="#" class="thumbnail text-center">
+          <img src="tree-2010_000245-10.png">
+          <div class="caption"><code>tree</code></div>
+        </span>
+      </div>
+    </div>
+
+    <a name="download"></a>
+    <div class="page-header"><h2 id="download">Download</h2></div>
+    <div class="well row">
+      <div class="col-md-6">
+        <h3 id="training-and-validation-set">Training and Validation Set</h2>
+        <p>The following download contains <em>only</em> the annotations for the training/validation set and a text file (<code>labels.txt</code>) containing the integer-to-name mapping.</p>
+        <p><a class="btn btn-primary btn-lg" href="trainval.tar.gz">trainval.tar.gz (30.7 MB)</a></p>
+        <ul>
+          <li>MD5: <code>df034edb2c12aa7d33b42b20bb1796e3</code></li>
+          <li>SHA1: <code>e1375777199dcc02097e68aea755415ca173aa2d</code></li>
+        </ul>
+        <p>Original images for the dataset can be downloaded from the <a href="http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2010/">PASCAL VOC 2010 website</a>.</p>
+      </div>
+      <div class="col-md-6">
+        <h3 id="testing-set">Testing Set</h2>
+        <p>PASCAL VOC 2010 released their testing set, and this set was also annotated. Since we are not hosting a challenge the testing set will be made available soon.</p>
+        <p><a class="btn btn-primary btn-lg" disabled="disabled" href="#">test.tar.gz (coming soon)</a></p>
+        <p>Original images for the test set can be downloaded from the <a href="http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2010/#testdata">PASCAL VOC 2010 website</a>.</p>
+      </div>
+    </div>
+    <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
+
+    <a name="statistics"></a>
+    <div class="page-header"><h2 id="statistics">Statistics</h2></div>
+    <p>Since the dataset is an annotation of PASCAL VOC 2010 it shares the same set numbers. <code>trainval</code> contains 9,637 images while <code>test</code> contains 10,417 images.</p>
+    <p>Click on the panel below to expand the full class list. The following image count and average area are calculated only over the training and validation set. When the testing set is released these numbers will be updated.</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#class-list">Class list</a>
+        </h4>
+      </div>
+      <div id="class-list" class="panel-collapse collapse out">
+        <div class="panel-body">
+          <table class="table table-condensed">
+            <tr><th>Class Name</th><th># of Images</th><th>Average Area (% of image)</th>
+            <tr><td><code>empty</code></td><td>0</td><td></td>
+            <tr><td><code>accordion</code></td><td>2</td><td>5.26%</td>
+            <tr><td><code>aeroplane</code></td><td>597</td><td>17.41%</td>
+            <tr><td><code>air conditioner</code></td><td>5</td><td>2.68%</td>
+            <tr><td><code>antenna</code></td><td>2</td><td>0.80%</td>
+            <tr><td><code>artillery</code></td><td>1</td><td>3.36%</td>
+            <tr><td><code>ashtray</code></td><td>18</td><td>1.11%</td>
+            <tr><td><code>atrium</code></td><td>1</td><td>13.64%</td>
+            <tr><td><code>baby carriage</code></td><td>13</td><td>12.28%</td>
+            <tr><td><code>bag</code></td><td>319</td><td>3.18%</td>
+            <tr><td><code>ball</code></td><td>25</td><td>2.12%</td>
+            <tr><td><code>balloon</code></td><td>18</td><td>2.88%</td>
+            <tr><td><code>bamboo weaving</code></td><td>1</td><td>12.78%</td>
+            <tr><td><code>barrel</code></td><td>3</td><td>3.58%</td>
+            <tr><td><code>baseball bat</code></td><td>1</td><td>1.05%</td>
+            <tr><td><code>basket</code></td><td>89</td><td>5.70%</td>
+            <tr><td><code>basketball backboard</code></td><td>6</td><td>5.37%</td>
+            <tr><td><code>bathtub</code></td><td>5</td><td>36.08%</td>
+            <tr><td><code>bed</code></td><td>120</td><td>28.08%</td>
+            <tr><td><code>bedclothes</code></td><td>296</td><td>27.01%</td>
+            <tr><td><code>beer</code></td><td>1</td><td>2.41%</td>
+            <tr><td><code>bell</code></td><td>2</td><td>1.24%</td>
+            <tr><td><code>bench</code></td><td>119</td><td>5.49%</td>
+            <tr><td><code>bicycle</code></td><td>503</td><td>17.20%</td>
+            <tr><td><code>binoculars</code></td><td>0</td><td></td>
+            <tr><td><code>bird</code></td><td>664</td><td>12.36%</td>
+            <tr><td><code>bird cage</code></td><td>21</td><td>44.05%</td>
+            <tr><td><code>bird feeder</code></td><td>14</td><td>18.47%</td>
+            <tr><td><code>bird nest</code></td><td>6</td><td>21.69%</td>
+            <tr><td><code>blackboard</code></td><td>2</td><td>12.70%</td>
+            <tr><td><code>board</code></td><td>137</td><td>9.67%</td>
+            <tr><td><code>boat</code></td><td>466</td><td>16.67%</td>
+            <tr><td><code>bone</code></td><td>3</td><td>2.55%</td>
+            <tr><td><code>book</code></td><td>416</td><td>3.80%</td>
+            <tr><td><code>bottle</code></td><td>821</td><td>7.35%</td>
+            <tr><td><code>bottle opener</code></td><td>1</td><td>0.61%</td>
+            <tr><td><code>bowl</code></td><td>137</td><td>2.57%</td>
+            <tr><td><code>box</code></td><td>434</td><td>5.16%</td>
+            <tr><td><code>bracelet</code></td><td>1</td><td>0.76%</td>
+            <tr><td><code>brick</code></td><td>9</td><td>4.38%</td>
+            <tr><td><code>bridge</code></td><td>31</td><td>10.39%</td>
+            <tr><td><code>broom</code></td><td>5</td><td>6.75%</td>
+            <tr><td><code>brush</code></td><td>120</td><td>10.28%</td>
+            <tr><td><code>bucket</code></td><td>175</td><td>2.73%</td>
+            <tr><td><code>building</code></td><td>3064</td><td>20.22%</td>
+            <tr><td><code>bus</code></td><td>399</td><td>32.86%</td>
+            <tr><td><code>cabinet</code></td><td>536</td><td>13.62%</td>
+            <tr><td><code>cabinet door</code></td><td>1</td><td>5.84%</td>
+            <tr><td><code>cage</code></td><td>29</td><td>32.76%</td>
+            <tr><td><code>cake</code></td><td>2</td><td>8.76%</td>
+            <tr><td><code>calculator</code></td><td>1</td><td>1.30%</td>
+            <tr><td><code>calendar</code></td><td>15</td><td>3.30%</td>
+            <tr><td><code>camel</code></td><td>0</td><td></td>
+            <tr><td><code>camera</code></td><td>52</td><td>1.80%</td>
+            <tr><td><code>camera lens</code></td><td>0</td><td></td>
+            <tr><td><code>can</code></td><td>78</td><td>2.24%</td>
+            <tr><td><code>candle</code></td><td>43</td><td>1.04%</td>
+            <tr><td><code>candle holder</code></td><td>29</td><td>0.93%</td>
+            <tr><td><code>cap</code></td><td>16</td><td>3.45%</td>
+            <tr><td><code>car</code></td><td>1273</td><td>19.45%</td>
+            <tr><td><code>card</code></td><td>11</td><td>3.41%</td>
+            <tr><td><code>cart</code></td><td>11</td><td>6.56%</td>
+            <tr><td><code>case</code></td><td>91</td><td>4.12%</td>
+            <tr><td><code>casette recorder</code></td><td>1</td><td>1.82%</td>
+            <tr><td><code>cash register</code></td><td>1</td><td>0.88%</td>
+            <tr><td><code>cat</code></td><td>1006</td><td>33.30%</td>
+            <tr><td><code>cd</code></td><td>45</td><td>3.33%</td>
+            <tr><td><code>cd player</code></td><td>1</td><td>1.35%</td>
+            <tr><td><code>ceiling</code></td><td>586</td><td>10.00%</td>
+            <tr><td><code>cell phone</code></td><td>43</td><td>0.49%</td>
+            <tr><td><code>cello</code></td><td>4</td><td>15.31%</td>
+            <tr><td><code>chain</code></td><td>10</td><td>1.52%</td>
+            <tr><td><code>chair</code></td><td>1357</td><td>11.87%</td>
+            <tr><td><code>chessboard</code></td><td>2</td><td>1.37%</td>
+            <tr><td><code>chicken</code></td><td>0</td><td></td>
+            <tr><td><code>chopstick</code></td><td>8</td><td>1.12%</td>
+            <tr><td><code>clip</code></td><td>1</td><td>0.47%</td>
+            <tr><td><code>clippers</code></td><td>2</td><td>9.44%</td>
+            <tr><td><code>clock</code></td><td>61</td><td>0.99%</td>
+            <tr><td><code>closet</code></td><td>1</td><td>27.69%</td>
+            <tr><td><code>cloth</code></td><td>877</td><td>8.96%</td>
+            <tr><td><code>clothes tree</code></td><td>0</td><td></td>
+            <tr><td><code>coffee</code></td><td>4</td><td>0.59%</td>
+            <tr><td><code>coffee machine</code></td><td>2</td><td>1.41%</td>
+            <tr><td><code>comb</code></td><td>3</td><td>0.80%</td>
+            <tr><td><code>computer</code></td><td>118</td><td>8.21%</td>
+            <tr><td><code>concrete</code></td><td>9</td><td>6.79%</td>
+            <tr><td><code>cone</code></td><td>30</td><td>1.32%</td>
+            <tr><td><code>container</code></td><td>61</td><td>4.34%</td>
+            <tr><td><code>control booth</code></td><td>0</td><td></td>
+            <tr><td><code>controller</code></td><td>3</td><td>4.67%</td>
+            <tr><td><code>cooker</code></td><td>0</td><td></td>
+            <tr><td><code>copying machine</code></td><td>0</td><td></td>
+            <tr><td><code>coral</code></td><td>0</td><td></td>
+            <tr><td><code>cork</code></td><td>0</td><td></td>
+            <tr><td><code>corkscrew</code></td><td>0</td><td></td>
+            <tr><td><code>counter</code></td><td>31</td><td>11.19%</td>
+            <tr><td><code>court</code></td><td>2</td><td>14.94%</td>
+            <tr><td><code>cow</code></td><td>256</td><td>22.98%</td>
+            <tr><td><code>crabstick</code></td><td>1</td><td>2.44%</td>
+            <tr><td><code>crane</code></td><td>12</td><td>0.56%</td>
+            <tr><td><code>crate</code></td><td>2</td><td>0.74%</td>
+            <tr><td><code>cross</code></td><td>3</td><td>0.23%</td>
+            <tr><td><code>crutch</code></td><td>2</td><td>0.52%</td>
+            <tr><td><code>cup</code></td><td>432</td><td>2.46%</td>
+            <tr><td><code>curtain</code></td><td>381</td><td>11.51%</td>
+            <tr><td><code>cushion</code></td><td>75</td><td>12.60%</td>
+            <tr><td><code>cutting board</code></td><td>3</td><td>2.50%</td>
+            <tr><td><code>dais</code></td><td>1</td><td>10.10%</td>
+            <tr><td><code>disc</code></td><td>2</td><td>2.49%</td>
+            <tr><td><code>disc case</code></td><td>16</td><td>4.96%</td>
+            <tr><td><code>dishwasher</code></td><td>0</td><td></td>
+            <tr><td><code>dock</code></td><td>3</td><td>10.26%</td>
+            <tr><td><code>dog</code></td><td>1204</td><td>25.23%</td>
+            <tr><td><code>dolphin</code></td><td>0</td><td></td>
+            <tr><td><code>door</code></td><td>455</td><td>10.01%</td>
+            <tr><td><code>drainer</code></td><td>1</td><td>0.09%</td>
+            <tr><td><code>dray</code></td><td>1</td><td>10.38%</td>
+            <tr><td><code>drink dispenser</code></td><td>1</td><td>1.92%</td>
+            <tr><td><code>drinking machine</code></td><td>1</td><td>7.36%</td>
+            <tr><td><code>drop</code></td><td>0</td><td></td>
+            <tr><td><code>drug</code></td><td>1</td><td>1.52%</td>
+            <tr><td><code>drum</code></td><td>9</td><td>8.77%</td>
+            <tr><td><code>drum kit</code></td><td>8</td><td>7.93%</td>
+            <tr><td><code>duck</code></td><td>15</td><td>8.21%</td>
+            <tr><td><code>dumbbell</code></td><td>0</td><td></td>
+            <tr><td><code>earphone</code></td><td>8</td><td>1.21%</td>
+            <tr><td><code>earrings</code></td><td>1</td><td>1.07%</td>
+            <tr><td><code>egg</code></td><td>3</td><td>6.92%</td>
+            <tr><td><code>electric fan</code></td><td>11</td><td>2.57%</td>
+            <tr><td><code>electric iron</code></td><td>2</td><td>2.07%</td>
+            <tr><td><code>electric pot</code></td><td>1</td><td>2.02%</td>
+            <tr><td><code>electric saw</code></td><td>1</td><td>3.29%</td>
+            <tr><td><code>electronic keyboard</code></td><td>0</td><td></td>
+            <tr><td><code>engine</code></td><td>2</td><td>3.94%</td>
+            <tr><td><code>envelope</code></td><td>0</td><td></td>
+            <tr><td><code>equipment</code></td><td>27</td><td>7.52%</td>
+            <tr><td><code>escalator</code></td><td>0</td><td></td>
+            <tr><td><code>exhibition booth</code></td><td>2</td><td>17.59%</td>
+            <tr><td><code>extinguisher</code></td><td>6</td><td>0.95%</td>
+            <tr><td><code>eyeglass</code></td><td>15</td><td>2.72%</td>
+            <tr><td><code>fan</code></td><td>40</td><td>2.05%</td>
+            <tr><td><code>faucet</code></td><td>4</td><td>2.27%</td>
+            <tr><td><code>fax machine</code></td><td>1</td><td>2.58%</td>
+            <tr><td><code>fence</code></td><td>1021</td><td>10.79%</td>
+            <tr><td><code>ferris wheel</code></td><td>1</td><td>10.09%</td>
+            <tr><td><code>fire extinguisher</code></td><td>2</td><td>0.75%</td>
+            <tr><td><code>fire hydrant</code></td><td>2</td><td>4.74%</td>
+            <tr><td><code>fire place</code></td><td>41</td><td>9.53%</td>
+            <tr><td><code>fish</code></td><td>7</td><td>4.60%</td>
+            <tr><td><code>fish tank</code></td><td>3</td><td>25.04%</td>
+            <tr><td><code>fishbowl</code></td><td>1</td><td>18.00%</td>
+            <tr><td><code>fishing net</code></td><td>1</td><td>7.74%</td>
+            <tr><td><code>fishing pole</code></td><td>1</td><td>0.21%</td>
+            <tr><td><code>flag</code></td><td>100</td><td>2.05%</td>
+            <tr><td><code>flagstaff</code></td><td>3</td><td>1.58%</td>
+            <tr><td><code>flame</code></td><td>0</td><td></td>
+            <tr><td><code>flashlight</code></td><td>2</td><td>0.38%</td>
+            <tr><td><code>floor</code></td><td>1895</td><td>16.07%</td>
+            <tr><td><code>flower</code></td><td>190</td><td>7.67%</td>
+            <tr><td><code>fly</code></td><td>1</td><td>0.43%</td>
+            <tr><td><code>foam</code></td><td>0</td><td></td>
+            <tr><td><code>food</code></td><td>285</td><td>5.16%</td>
+            <tr><td><code>footbridge</code></td><td>1</td><td>10.82%</td>
+            <tr><td><code>forceps</code></td><td>0</td><td></td>
+            <tr><td><code>fork</code></td><td>104</td><td>0.63%</td>
+            <tr><td><code>forklift</code></td><td>0</td><td></td>
+            <tr><td><code>fountain</code></td><td>1</td><td>1.40%</td>
+            <tr><td><code>fox</code></td><td>0</td><td></td>
+            <tr><td><code>frame</code></td><td>17</td><td>5.86%</td>
+            <tr><td><code>fridge</code></td><td>69</td><td>10.07%</td>
+            <tr><td><code>frog</code></td><td>1</td><td>0.70%</td>
+            <tr><td><code>fruit</code></td><td>2</td><td>0.77%</td>
+            <tr><td><code>funnel</code></td><td>1</td><td>0.37%</td>
+            <tr><td><code>furnace</code></td><td>2</td><td>31.60%</td>
+            <tr><td><code>game controller</code></td><td>4</td><td>0.66%</td>
+            <tr><td><code>game machine</code></td><td>3</td><td>13.31%</td>
+            <tr><td><code>gas cylinder</code></td><td>0</td><td></td>
+            <tr><td><code>gas hood</code></td><td>0</td><td></td>
+            <tr><td><code>gas stove</code></td><td>0</td><td></td>
+            <tr><td><code>gift box</code></td><td>2</td><td>10.96%</td>
+            <tr><td><code>glass</code></td><td>21</td><td>5.24%</td>
+            <tr><td><code>glass marble</code></td><td>1</td><td>8.14%</td>
+            <tr><td><code>globe</code></td><td>0</td><td></td>
+            <tr><td><code>glove</code></td><td>6</td><td>4.34%</td>
+            <tr><td><code>goal</code></td><td>4</td><td>10.04%</td>
+            <tr><td><code>grandstand</code></td><td>30</td><td>18.55%</td>
+            <tr><td><code>grass</code></td><td>2742</td><td>23.28%</td>
+            <tr><td><code>gravestone</code></td><td>0</td><td></td>
+            <tr><td><code>ground</code></td><td>2987</td><td>20.98%</td>
+            <tr><td><code>guardrail</code></td><td>35</td><td>6.09%</td>
+            <tr><td><code>guitar</code></td><td>53</td><td>4.83%</td>
+            <tr><td><code>gun</code></td><td>2</td><td>1.07%</td>
+            <tr><td><code>hammer</code></td><td>1</td><td>0.08%</td>
+            <tr><td><code>hand cart</code></td><td>11</td><td>4.87%</td>
+            <tr><td><code>handle</code></td><td>2</td><td>4.16%</td>
+            <tr><td><code>handrail</code></td><td>7</td><td>3.75%</td>
+            <tr><td><code>hanger</code></td><td>3</td><td>0.66%</td>
+            <tr><td><code>hard disk drive</code></td><td>0</td><td></td>
+            <tr><td><code>hat</code></td><td>27</td><td>4.07%</td>
+            <tr><td><code>hay</code></td><td>3</td><td>21.08%</td>
+            <tr><td><code>headphone</code></td><td>7</td><td>0.49%</td>
+            <tr><td><code>heater</code></td><td>4</td><td>8.10%</td>
+            <tr><td><code>helicopter</code></td><td>3</td><td>12.77%</td>
+            <tr><td><code>helmet</code></td><td>62</td><td>2.32%</td>
+            <tr><td><code>holder</code></td><td>2</td><td>2.23%</td>
+            <tr><td><code>hook</code></td><td>2</td><td>0.61%</td>
+            <tr><td><code>horse</code></td><td>429</td><td>22.31%</td>
+            <tr><td><code>horse-drawn carriage</code></td><td>25</td><td>12.70%</td>
+            <tr><td><code>hot-air balloon</code></td><td>1</td><td>84.05%</td>
+            <tr><td><code>hydrovalve</code></td><td>0</td><td></td>
+            <tr><td><code>ice</code></td><td>6</td><td>31.35%</td>
+            <tr><td><code>inflator pump</code></td><td>0</td><td></td>
+            <tr><td><code>ipod</code></td><td>15</td><td>0.75%</td>
+            <tr><td><code>iron</code></td><td>2</td><td>2.15%</td>
+            <tr><td><code>ironing board</code></td><td>1</td><td>9.63%</td>
+            <tr><td><code>jar</code></td><td>18</td><td>2.80%</td>
+            <tr><td><code>kart</code></td><td>1</td><td>16.90%</td>
+            <tr><td><code>kettle</code></td><td>1</td><td>1.96%</td>
+            <tr><td><code>key</code></td><td>4</td><td>1.86%</td>
+            <tr><td><code>keyboard</code></td><td>140</td><td>4.69%</td>
+            <tr><td><code>kitchen range</code></td><td>12</td><td>7.54%</td>
+            <tr><td><code>kite</code></td><td>1</td><td>0.26%</td>
+            <tr><td><code>knife</code></td><td>92</td><td>0.61%</td>
+            <tr><td><code>knife block</code></td><td>2</td><td>0.30%</td>
+            <tr><td><code>ladder</code></td><td>12</td><td>3.91%</td>
+            <tr><td><code>ladder truck</code></td><td>1</td><td>0.84%</td>
+            <tr><td><code>ladle</code></td><td>1</td><td>2.83%</td>
+            <tr><td><code>laptop</code></td><td>75</td><td>10.55%</td>
+            <tr><td><code>leaves</code></td><td>7</td><td>33.39%</td>
+            <tr><td><code>lid</code></td><td>1</td><td>1.37%</td>
+            <tr><td><code>life buoy</code></td><td>2</td><td>14.83%</td>
+            <tr><td><code>light</code></td><td>908</td><td>1.18%</td>
+            <tr><td><code>light bulb</code></td><td>1</td><td>0.68%</td>
+            <tr><td><code>lighter</code></td><td>5</td><td>0.21%</td>
+            <tr><td><code>line</code></td><td>1</td><td>0.14%</td>
+            <tr><td><code>lion</code></td><td>0</td><td></td>
+            <tr><td><code>lobster</code></td><td>0</td><td></td>
+            <tr><td><code>lock</code></td><td>1</td><td>0.15%</td>
+            <tr><td><code>machine</code></td><td>0</td><td></td>
+            <tr><td><code>mailbox</code></td><td>3</td><td>0.39%</td>
+            <tr><td><code>mannequin</code></td><td>1</td><td>11.90%</td>
+            <tr><td><code>map</code></td><td>3</td><td>32.42%</td>
+            <tr><td><code>mask</code></td><td>0</td><td></td>
+            <tr><td><code>mat</code></td><td>35</td><td>11.11%</td>
+            <tr><td><code>match book</code></td><td>1</td><td>2.29%</td>
+            <tr><td><code>mattress</code></td><td>3</td><td>1.72%</td>
+            <tr><td><code>menu</code></td><td>24</td><td>4.34%</td>
+            <tr><td><code>metal</code></td><td>216</td><td>4.28%</td>
+            <tr><td><code>meter box</code></td><td>1</td><td>3.43%</td>
+            <tr><td><code>microphone</code></td><td>44</td><td>0.71%</td>
+            <tr><td><code>microwave</code></td><td>26</td><td>3.61%</td>
+            <tr><td><code>mirror</code></td><td>81</td><td>5.60%</td>
+            <tr><td><code>missile</code></td><td>1</td><td>5.71%</td>
+            <tr><td><code>model</code></td><td>1</td><td>27.81%</td>
+            <tr><td><code>money</code></td><td>1</td><td>6.08%</td>
+            <tr><td><code>monkey</code></td><td>1</td><td>2.75%</td>
+            <tr><td><code>mop</code></td><td>3</td><td>0.66%</td>
+            <tr><td><code>motorbike</code></td><td>471</td><td>24.63%</td>
+            <tr><td><code>mountain</code></td><td>728</td><td>10.75%</td>
+            <tr><td><code>mouse</code></td><td>122</td><td>0.43%</td>
+            <tr><td><code>mouse pad</code></td><td>50</td><td>3.58%</td>
+            <tr><td><code>musical instrument</code></td><td>7</td><td>11.16%</td>
+            <tr><td><code>napkin</code></td><td>120</td><td>2.60%</td>
+            <tr><td><code>net</code></td><td>3</td><td>6.81%</td>
+            <tr><td><code>newspaper</code></td><td>30</td><td>3.99%</td>
+            <tr><td><code>oar</code></td><td>10</td><td>5.48%</td>
+            <tr><td><code>ornament</code></td><td>2</td><td>0.79%</td>
+            <tr><td><code>outlet</code></td><td>26</td><td>0.48%</td>
+            <tr><td><code>oven</code></td><td>8</td><td>10.24%</td>
+            <tr><td><code>oxygen bottle</code></td><td>1</td><td>4.21%</td>
+            <tr><td><code>pack</code></td><td>287</td><td>3.18%</td>
+            <tr><td><code>pan</code></td><td>10</td><td>3.51%</td>
+            <tr><td><code>paper</code></td><td>298</td><td>4.02%</td>
+            <tr><td><code>paper box</code></td><td>4</td><td>0.99%</td>
+            <tr><td><code>paper cutter</code></td><td>6</td><td>6.75%</td>
+            <tr><td><code>parachute</code></td><td>4</td><td>3.45%</td>
+            <tr><td><code>parasol</code></td><td>17</td><td>4.14%</td>
+            <tr><td><code>parterre</code></td><td>1</td><td>14.77%</td>
+            <tr><td><code>patio</code></td><td>1</td><td>23.16%</td>
+            <tr><td><code>pelage</code></td><td>0</td><td></td>
+            <tr><td><code>pen</code></td><td>44</td><td>0.33%</td>
+            <tr><td><code>pen container</code></td><td>8</td><td>1.14%</td>
+            <tr><td><code>pencil</code></td><td>2</td><td>0.65%</td>
+            <tr><td><code>person</code></td><td>3919</td><td>20.64%</td>
+            <tr><td><code>photo</code></td><td>3</td><td>2.69%</td>
+            <tr><td><code>piano</code></td><td>4</td><td>8.83%</td>
+            <tr><td><code>picture</code></td><td>674</td><td>5.70%</td>
+            <tr><td><code>pig</code></td><td>1</td><td>1.41%</td>
+            <tr><td><code>pillar</code></td><td>8</td><td>3.16%</td>
+            <tr><td><code>pillow</code></td><td>55</td><td>11.18%</td>
+            <tr><td><code>pipe</code></td><td>16</td><td>2.01%</td>
+            <tr><td><code>pitcher</code></td><td>3</td><td>3.36%</td>
+            <tr><td><code>plant</code></td><td>106</td><td>14.52%</td>
+            <tr><td><code>plastic</code></td><td>11</td><td>6.37%</td>
+            <tr><td><code>plate</code></td><td>346</td><td>4.44%</td>
+            <tr><td><code>platform</code></td><td>154</td><td>15.39%</td>
+            <tr><td><code>player</code></td><td>24</td><td>2.37%</td>
+            <tr><td><code>playground</code></td><td>1</td><td>5.70%</td>
+            <tr><td><code>pliers</code></td><td>1</td><td>0.39%</td>
+            <tr><td><code>plume</code></td><td>1</td><td>1.76%</td>
+            <tr><td><code>poker</code></td><td>1</td><td>0.73%</td>
+            <tr><td><code>poker chip</code></td><td>1</td><td>7.81%</td>
+            <tr><td><code>pole</code></td><td>1555</td><td>1.53%</td>
+            <tr><td><code>pool table</code></td><td>1</td><td>29.81%</td>
+            <tr><td><code>postcard</code></td><td>1</td><td>1.72%</td>
+            <tr><td><code>poster</code></td><td>185</td><td>6.82%</td>
+            <tr><td><code>pot</code></td><td>310</td><td>3.08%</td>
+            <tr><td><code>pottedplant</code></td><td>625</td><td>11.89%</td>
+            <tr><td><code>printer</code></td><td>34</td><td>2.92%</td>
+            <tr><td><code>projector</code></td><td>2</td><td>0.52%</td>
+            <tr><td><code>pumpkin</code></td><td>2</td><td>7.72%</td>
+            <tr><td><code>rabbit</code></td><td>1</td><td>0.14%</td>
+            <tr><td><code>racket</code></td><td>1</td><td>4.75%</td>
+            <tr><td><code>radiator</code></td><td>27</td><td>3.93%</td>
+            <tr><td><code>radio</code></td><td>6</td><td>2.22%</td>
+            <tr><td><code>rail</code></td><td>31</td><td>6.12%</td>
+            <tr><td><code>rake</code></td><td>1</td><td>0.26%</td>
+            <tr><td><code>ramp</code></td><td>2</td><td>3.15%</td>
+            <tr><td><code>range hood</code></td><td>8</td><td>3.98%</td>
+            <tr><td><code>receiver</code></td><td>13</td><td>1.12%</td>
+            <tr><td><code>recorder</code></td><td>2</td><td>23.21%</td>
+            <tr><td><code>recreational machines</code></td><td>1</td><td>61.90%</td>
+            <tr><td><code>remote control</code></td><td>67</td><td>0.93%</td>
+            <tr><td><code>road</code></td><td>1102</td><td>21.97%</td>
+            <tr><td><code>robot</code></td><td>0</td><td></td>
+            <tr><td><code>rock</code></td><td>396</td><td>10.72%</td>
+            <tr><td><code>rocket</code></td><td>0</td><td></td>
+            <tr><td><code>rocking horse</code></td><td>1</td><td>0.74%</td>
+            <tr><td><code>rope</code></td><td>507</td><td>1.35%</td>
+            <tr><td><code>rug</code></td><td>181</td><td>20.69%</td>
+            <tr><td><code>ruler</code></td><td>1</td><td>1.61%</td>
+            <tr><td><code>runway</code></td><td>2</td><td>11.72%</td>
+            <tr><td><code>saddle</code></td><td>85</td><td>1.95%</td>
+            <tr><td><code>sand</code></td><td>46</td><td>36.43%</td>
+            <tr><td><code>saw</code></td><td>1</td><td>1.53%</td>
+            <tr><td><code>scale</code></td><td>2</td><td>3.64%</td>
+            <tr><td><code>scanner</code></td><td>1</td><td>1.43%</td>
+            <tr><td><code>scissors</code></td><td>5</td><td>0.72%</td>
+            <tr><td><code>scoop</code></td><td>1</td><td>0.04%</td>
+            <tr><td><code>screen</code></td><td>4</td><td>13.73%</td>
+            <tr><td><code>screwdriver</code></td><td>2</td><td>0.32%</td>
+            <tr><td><code>sculpture</code></td><td>73</td><td>7.67%</td>
+            <tr><td><code>scythe</code></td><td>0</td><td></td>
+            <tr><td><code>sewer</code></td><td>2</td><td>26.70%</td>
+            <tr><td><code>sewing machine</code></td><td>3</td><td>1.06%</td>
+            <tr><td><code>shed</code></td><td>2</td><td>2.25%</td>
+            <tr><td><code>sheep</code></td><td>297</td><td>21.95%</td>
+            <tr><td><code>shell</code></td><td>3</td><td>2.43%</td>
+            <tr><td><code>shelves</code></td><td>448</td><td>7.64%</td>
+            <tr><td><code>shoe</code></td><td>74</td><td>2.68%</td>
+            <tr><td><code>shopping cart</code></td><td>2</td><td>4.54%</td>
+            <tr><td><code>shovel</code></td><td>2</td><td>1.07%</td>
+            <tr><td><code>sidecar</code></td><td>2</td><td>15.60%</td>
+            <tr><td><code>sidewalk</code></td><td>382</td><td>8.65%</td>
+            <tr><td><code>sign</code></td><td>592</td><td>2.32%</td>
+            <tr><td><code>signal light</code></td><td>43</td><td>0.98%</td>
+            <tr><td><code>sink</code></td><td>24</td><td>15.51%</td>
+            <tr><td><code>skateboard</code></td><td>1</td><td>0.81%</td>
+            <tr><td><code>ski</code></td><td>3</td><td>5.71%</td>
+            <tr><td><code>sky</code></td><td>3231</td><td>26.77%</td>
+            <tr><td><code>sled</code></td><td>2</td><td>4.28%</td>
+            <tr><td><code>slippers</code></td><td>1</td><td>4.63%</td>
+            <tr><td><code>smoke</code></td><td>56</td><td>10.42%</td>
+            <tr><td><code>snail</code></td><td>0</td><td></td>
+            <tr><td><code>snake</code></td><td>3</td><td>15.25%</td>
+            <tr><td><code>snow</code></td><td>173</td><td>28.71%</td>
+            <tr><td><code>snowmobiles</code></td><td>1</td><td>16.52%</td>
+            <tr><td><code>sofa</code></td><td>831</td><td>25.31%</td>
+            <tr><td><code>spanner</code></td><td>0</td><td></td>
+            <tr><td><code>spatula</code></td><td>1</td><td>1.36%</td>
+            <tr><td><code>speaker</code></td><td>118</td><td>3.48%</td>
+            <tr><td><code>speed bump</code></td><td>0</td><td></td>
+            <tr><td><code>spice container</code></td><td>23</td><td>0.99%</td>
+            <tr><td><code>spoon</code></td><td>75</td><td>0.51%</td>
+            <tr><td><code>sprayer</code></td><td>0</td><td></td>
+            <tr><td><code>squirrel</code></td><td>1</td><td>6.33%</td>
+            <tr><td><code>stage</code></td><td>16</td><td>49.30%</td>
+            <tr><td><code>stair</code></td><td>36</td><td>21.55%</td>
+            <tr><td><code>stapler</code></td><td>3</td><td>0.79%</td>
+            <tr><td><code>stick</code></td><td>4</td><td>0.28%</td>
+            <tr><td><code>sticky note</code></td><td>2</td><td>1.64%</td>
+            <tr><td><code>stone</code></td><td>0</td><td></td>
+            <tr><td><code>stool</code></td><td>9</td><td>3.18%</td>
+            <tr><td><code>stove</code></td><td>10</td><td>2.22%</td>
+            <tr><td><code>straw</code></td><td>6</td><td>0.47%</td>
+            <tr><td><code>stretcher</code></td><td>0</td><td></td>
+            <tr><td><code>sun</code></td><td>1</td><td>3.99%</td>
+            <tr><td><code>sunglass</code></td><td>4</td><td>0.86%</td>
+            <tr><td><code>sunshade</code></td><td>3</td><td>5.83%</td>
+            <tr><td><code>surveillance camera</code></td><td>1</td><td>0.16%</td>
+            <tr><td><code>swan</code></td><td>1</td><td>0.22%</td>
+            <tr><td><code>sweeper</code></td><td>0</td><td></td>
+            <tr><td><code>swim ring</code></td><td>2</td><td>9.90%</td>
+            <tr><td><code>swimming pool</code></td><td>1</td><td>3.01%</td>
+            <tr><td><code>swing</code></td><td>1</td><td>2.09%</td>
+            <tr><td><code>switch</code></td><td>5</td><td>0.51%</td>
+            <tr><td><code>table</code></td><td>1566</td><td>9.76%</td>
+            <tr><td><code>tableware</code></td><td>3</td><td>4.19%</td>
+            <tr><td><code>tank</code></td><td>2</td><td>2.63%</td>
+            <tr><td><code>tap</code></td><td>12</td><td>2.30%</td>
+            <tr><td><code>tape</code></td><td>9</td><td>0.51%</td>
+            <tr><td><code>tarp</code></td><td>2</td><td>43.12%</td>
+            <tr><td><code>telephone</code></td><td>71</td><td>1.72%</td>
+            <tr><td><code>telephone booth</code></td><td>0</td><td></td>
+            <tr><td><code>tent</code></td><td>36</td><td>12.26%</td>
+            <tr><td><code>tire</code></td><td>35</td><td>3.29%</td>
+            <tr><td><code>toaster</code></td><td>5</td><td>1.70%</td>
+            <tr><td><code>toilet</code></td><td>2</td><td>12.68%</td>
+            <tr><td><code>tong</code></td><td>1</td><td>1.80%</td>
+            <tr><td><code>tool</code></td><td>3</td><td>3.06%</td>
+            <tr><td><code>toothbrush</code></td><td>1</td><td>0.80%</td>
+            <tr><td><code>towel</code></td><td>3</td><td>18.69%</td>
+            <tr><td><code>toy</code></td><td>356</td><td>5.21%</td>
+            <tr><td><code>toy car</code></td><td>2</td><td>30.91%</td>
+            <tr><td><code>track</code></td><td>356</td><td>9.15%</td>
+            <tr><td><code>train</code></td><td>465</td><td>28.46%</td>
+            <tr><td><code>trampoline</code></td><td>1</td><td>15.35%</td>
+            <tr><td><code>trash bin</code></td><td>91</td><td>3.03%</td>
+            <tr><td><code>tray</code></td><td>9</td><td>5.46%</td>
+            <tr><td><code>tree</code></td><td>3232</td><td>18.02%</td>
+            <tr><td><code>tricycle</code></td><td>0</td><td></td>
+            <tr><td><code>tripod</code></td><td>2</td><td>8.27%</td>
+            <tr><td><code>trophy</code></td><td>2</td><td>1.04%</td>
+            <tr><td><code>truck</code></td><td>126</td><td>6.39%</td>
+            <tr><td><code>tube</code></td><td>3</td><td>3.82%</td>
+            <tr><td><code>turtle</code></td><td>1</td><td>0.98%</td>
+            <tr><td><code>tvmonitor</code></td><td>536</td><td>15.32%</td>
+            <tr><td><code>tweezers</code></td><td>0</td><td></td>
+            <tr><td><code>typewriter</code></td><td>1</td><td>3.40%</td>
+            <tr><td><code>umbrella</code></td><td>13</td><td>4.32%</td>
+            <tr><td><code>unknown</code></td><td>3734</td><td>8.99%</td>
+            <tr><td><code>vacuum cleaner</code></td><td>6</td><td>4.15%</td>
+            <tr><td><code>vending machine</code></td><td>2</td><td>23.66%</td>
+            <tr><td><code>video camera</code></td><td>11</td><td>1.94%</td>
+            <tr><td><code>video game console</code></td><td>11</td><td>1.77%</td>
+            <tr><td><code>video player</code></td><td>37</td><td>2.97%</td>
+            <tr><td><code>video tape</code></td><td>3</td><td>4.09%</td>
+            <tr><td><code>violin</code></td><td>4</td><td>4.37%</td>
+            <tr><td><code>wakeboard</code></td><td>0</td><td></td>
+            <tr><td><code>wall</code></td><td>2794</td><td>22.23%</td>
+            <tr><td><code>wallet</code></td><td>7</td><td>1.26%</td>
+            <tr><td><code>wardrobe</code></td><td>2</td><td>18.93%</td>
+            <tr><td><code>washing machine</code></td><td>17</td><td>15.58%</td>
+            <tr><td><code>watch</code></td><td>6</td><td>0.81%</td>
+            <tr><td><code>water</code></td><td>899</td><td>32.68%</td>
+            <tr><td><code>water dispenser</code></td><td>5</td><td>3.52%</td>
+            <tr><td><code>water pipe</code></td><td>3</td><td>2.94%</td>
+            <tr><td><code>water skate board</code></td><td>1</td><td>0.60%</td>
+            <tr><td><code>watermelon</code></td><td>2</td><td>7.00%</td>
+            <tr><td><code>whale</code></td><td>0</td><td></td>
+            <tr><td><code>wharf</code></td><td>0</td><td></td>
+            <tr><td><code>wheel</code></td><td>8</td><td>17.21%</td>
+            <tr><td><code>wheelchair</code></td><td>5</td><td>3.78%</td>
+            <tr><td><code>window</code></td><td>756</td><td>11.07%</td>
+            <tr><td><code>window blinds</code></td><td>1</td><td>1.57%</td>
+            <tr><td><code>wineglass</code></td><td>197</td><td>2.95%</td>
+            <tr><td><code>wire</code></td><td>113</td><td>1.17%</td>
+            <tr><td><code>wood</code></td><td>462</td><td>8.29%</td>
+            <tr><td><code>wool</code></td><td>2</td><td>4.78%</td>
+          </table>
+          <a data-toggle="collapse" data-parent="#accordion" href="#class-list">close class list</a>
+        </div>
+      </div>
+    </div>
+    <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
+
+    <a name="considerations"></a>
+    <div class="page-header"><h2 id="usage-considerations">Usage Considerations</h2></div>
+    <p>This annotation set is <strong>not</strong> like other object segmentation datasets where there exists a clear foreground object(s) and a segmentation for <em>just</em> the foreground object(s) are available.</p>
+    <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is. The annotation also only specifies a single class per pixel. It also does not specify instance or part labels.</p>
+    <p>This leads to some interesting ambiguities and post-processing. For example, the clothes on a person are not labeled <code>cloth</code> but rather labeled <code>person</code>.</p>
+    <p>When using this dataset it is important that you examine classes to ensure they match your intended use. For example, <code>sand</code> is often labeled independently despite also being considered <code>ground</code>. Those interested in <code>ground</code> may want to cluster <code>sand</code> and <code>ground</code> together along with other classes.
+    <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p> 
+
+    <a name="work"></a>
+    <div class="page-header"><h2 id="work">Work</h2></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="media">
+          <a class="pull-left text-center" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a>
+          <div class="media-body">
+            <h3 id="the-role-of-context-for-object-detection-and-semantic-segmentation-in-the-wild">The Role of Context for Object Detection and Semantic Segmentation in the Wild</h3>
+            <p>Roozbeh Mottaghi, Xianjie Chen, Xiaobai Liu, Nam-Gyu Cho, Seong-Whan Lee, Sanja Fidler, Raquel Urtasun, Alan Yuille</p>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="media">
+          <a class="pull-left text-center" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a>
+          <div class="media-body">
+            <h3 id="the-role-of-context-for-object-detection-and-semantic-segmentation-in-the-wild">Another Paper Using This Dataset</h3>
+            <p>Illustrious Author One, Person Who Did Lots of Work, Another Person Who Did Lots of Work, Professors Who Need Political Satiation, The Almighty Advisor</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
+
+    <a name="acknowledgements"></a>
+    <div class="page-header"><h2 id="acknowledgements">Acknowledgements</h2></div>
+    <ul>
+      <li><a href="http://www.korea.ac.kr/mbshome/mbs/university/index.do">Korea University</a></li>
+      <li>
+        <a href="http://www.ucla.edu/">University of California, Los Angeles</a>
+        <ul>
+        <li><a href="http://statistics.ucla.edu/">Department of Statistics</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
+
+  </div>
+
+</body>
+
+</html>
