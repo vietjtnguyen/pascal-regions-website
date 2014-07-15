@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>PASCAL Regions Dataset</title>
+  <title>PASCAL-Context Dataset</title>
   <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -34,7 +34,7 @@
         <li><a href="#download">Download</a></li>
         <li><a href="#statistics">Statistics</a></li>
         <li><a href="#considerations">Usage Considerations</a></li>
-        <li><a href="#work">Work</a></li>
+        <li><a href="#citation">Citation</a></li>
         <li><a href="#acknowledgements">Acknowledgements</a></li>
       </ul>
     </div>
@@ -43,7 +43,7 @@
   <div class="container">
 
     <a name="introduction"></a>
-    <div class="page-header"><h1 id="pascal-regions-dataset">PASCAL Regions Dataset</h1></div>
+    <div class="page-header"><h1 id="pascal-context-dataset">PASCAL-Context Dataset</h1></div>
     <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond the original PASCAL semantic segmentation task by providing annotations for the whole scene. This boils down to a per-pixel class label. The <a href="#statistics">statistics section</a> has a full list of labels.</p>
     <p>Below are some example segmentations from the dataset.</p>
     <div class="row">
@@ -103,7 +103,7 @@
       </div>
       <div class="col-md-6">
         <h3 id="testing-set">Testing Set</h2>
-        <p>PASCAL VOC 2010 released their testing set, and this set was also annotated. Since we are not hosting a challenge the testing set will be made available soon.</p>
+        <p>To avoid the conflict with the goals of PASCAL challenge, we will not release the annotations for the test set at this point.</p>
         <p><a class="btn btn-primary btn-lg" disabled="disabled" href="#">test.tar.gz (coming soon)</a></p>
         <p>Original images for the test set can be downloaded from the <a href="http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2010/#testdata">PASCAL VOC 2010 website</a>.</p>
       </div>
@@ -112,7 +112,7 @@
 
     <a name="statistics"></a>
     <div class="page-header"><h2 id="statistics">Statistics</h2></div>
-    <p>Since the dataset is an annotation of PASCAL VOC 2010 it shares the same set numbers. Training and validation contains 10,103 images while testing contains 9,637 images.</p>
+    <p>Since the dataset is an annotation of PASCAL VOC 2010, it has the same statistics as those of the original dataset. Training and validation contains 10,103 images while testing contains 9,637 images.</p>
     <p>Click on the panel below to expand the full class list. The following image count and average area are calculated only over the training and validation set. When the testing set is released these numbers will be updated. Image counts below may be zero because a class was present in the testing set but not the training and validation set.</p>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -593,12 +593,12 @@
 
     <a name="considerations"></a>
     <div class="page-header"><h2 id="usage-considerations">Usage Considerations</h2></div>
-    <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is.</p>
+    <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is. We decided to merge some of the categories so the current number of categories is different from what we mentioned in the CVPR 2014 paper.</p>
     <p>When using this dataset it is important that you examine classes to ensure they match your intended use. For example, <code>sand</code> is often labeled independently despite also being considered <code>ground</code>. Those interested in <code>ground</code> may want to cluster <code>sand</code> and <code>ground</code> together along with other classes.
     <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p> 
 
-    <a name="work"></a>
-    <div class="page-header"><h2 id="work">Work</h2></div>
+    <a name="citation"></a>
+    <div class="page-header"><h2 id="citation">Citation</h2></div>
     <ul class="list-group">
       <li class="list-group-item">
         <div class="media">
@@ -624,17 +624,32 @@
 
     <a name="acknowledgements"></a>
     <div class="page-header"><h2 id="acknowledgements">Acknowledgements</h2></div>
+    <p>We would like to acknowledge the support from the following grants:</p>
+    <ul>
+      <li>Implementation of Technologies for Identification, Behavior, and Location of Human based on Sensor Network Fusion Program through the Korean Ministry of Trade, Industry and Energy (Grant Number: 10041629)</li>
+      <li>National Science Foundation for grant 1317376 (Visual Cortex on Silicon. NSF Expedition in Computing)</li>
+    </ul>
+    <p>The following institutions and people were instrumental in bringing this dataset to fruition:</p>
     <ul>
       <li>
-        <a href="http://www.korea.ac.kr/mbshome/mbs/university/index.do">Korea University</a>
+        Department of Brain and Cognitive Engineering, Korea University
         <ul>
-          <li><a href="http://brain.korea.ac.kr/eng/">Department of Brain and Cognitive Engineering</a></li>
+          <li>Seong-Whan Lee</li>
+          <li>Nam-Gyu Cho</li>
         </ul>
       </li>
       <li>
-        <a href="http://www.ucla.edu/">University of California, Los Angeles</a>
+        Department of Statistics, University of California, Los Angeles
         <ul>
-          <li><a href="http://statistics.ucla.edu/">Department of Statistics</a></li>
+          <li>Alan L. Yuille</li>
+          <li>Xiaobai Liu</li>
+          <li>Viet Nguyen</li>
+        </ul>
+      </li>
+      <li>
+        Computer Science Department, Stanford University
+        <ul>
+          <li>Roozbeh Mottaghi</li>
         </ul>
       </li>
     </ul>
