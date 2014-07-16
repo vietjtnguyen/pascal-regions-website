@@ -44,7 +44,7 @@
 
     <a name="introduction"></a>
     <div class="page-header"><h1 id="pascal-context-dataset">PASCAL-Context Dataset</h1></div>
-    <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond the original PASCAL semantic segmentation task by providing annotations for the whole scene. This boils down to a per-pixel class label. The <a href="#statistics">statistics section</a> has a full list of labels.</p>
+    <p>This dataset is a set of additional annotations for PASCAL VOC 2010. It goes beyond the original PASCAL semantic segmentation task by providing annotations for the whole scene. The <a href="#statistics">statistics section</a> has a full list of 400+ labels.</p>
     <p>Below are some example segmentations from the dataset.</p>
     <div class="row">
       <div class="col-md-4">
@@ -103,16 +103,14 @@
       </div>
       <div class="col-md-6">
         <h3 id="testing-set">Testing Set</h2>
-        <p>To avoid the conflict with the goals of PASCAL challenge, we will not release the annotations for the test set at this point.</p>
-        <p><a class="btn btn-primary btn-lg" disabled="disabled" href="#">test.tar.gz (coming soon)</a></p>
-        <p>Original images for the test set can be downloaded from the <a href="http://pascallin.ecs.soton.ac.uk/challenges/VOC/voc2010/#testdata">PASCAL VOC 2010 website</a>.</p>
+        <p>We will not release the annotations for the test set at this point so that we do not violate the rules of PASCAL challenge.</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-2"></div>
       <div class="well col-md-8">
         <h3>Project Specific Downloads</h3>
-        <p>The segmentation results for the 33 categories and the label-to-name mapping used in the CVPR 2014 paper can be downloaded here:</p>
+        <p>The segmentation results for the 33 categories and the label-to-name mapping used in the CVPR 2014 paper can be downloaded here (trained on the train subset and tested on the val subset):</p>
         <p><a class="btn btn-primary" href="33_context_labels.tar.gz">33_context_labels.tar.gz (27.1 MB)</a></p>
         <ul>
           <li>MD5: <code>180101cfc01c71867b6686207f071eb9</code></li>
@@ -611,7 +609,7 @@
 
     <a name="considerations"></a>
     <div class="page-header"><h2 id="usage-considerations">Usage Considerations</h2></div>
-    <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is. We decided to merge some of the categories so the current number of categories is different from what we mentioned in the CVPR 2014 paper.</p>
+    <p>The classes are not drawn from a fixed pool. Instead labelers were free to either select or type in what they believe to be the appropriate class and to determine what the appropriate object granularity is. We decided to merge/split some of the categories so the current number of categories is different from what we mentioned in the CVPR 2014 paper.</p>
     <p>When using this dataset it is important that you examine classes to ensure they match your intended use. For example, <code>sand</code> is often labeled independently despite also being considered <code>ground</code>. Those interested in <code>ground</code> may want to cluster <code>sand</code> and <code>ground</code> together along with other classes.
     <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p> 
 
@@ -620,10 +618,12 @@
     <ul class="list-group">
       <li class="list-group-item">
         <div class="media">
-          <a class="pull-left text-center" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a>
+          <div class="pull-left text-center">
+            <a class="" href="mottaghi_et_al_cvpr14.pdf"><h2><span class="glyphicon glyphicon-file"></span></h2>PDF (2.4 MB)</a><br><a class="pull-left text-center" href="mottaghi_et_al_cvpr14.bib">Bibtex (398 B)</a>
+          </div>
           <div class="media-body">
             <h3>"The Role of Context for Object Detection and Semantic Segmentation in the Wild"</h3>
-            <p>Roozbeh Mottaghi, Xianjie Chen, Xiaobai Liu, Nam-Gyu Cho, Seong-Whan Lee, Sanja Fidler, Raquel Urtasun, Alan Yuille</p>
+            <p><a href="http://www.cs.stanford.edu/~roozbeh"> Roozbeh Mottaghi</a>, <a href="http://www.stat.ucla.edu/~xianjie.chen"> Xianjie Chen</a>, <a href="http://www.stat.ucla.edu/~xiaobai.liu/">Xiaobai Liu</a>, Nam-Gyu Cho, <a href="http://image.korea.ac.kr/bbs/board.php?bo_table=eng_02_01&wr_id=2">Seong-Whan Lee</a>, <a href="http://www.cs.utoronto.ca/~fidler/"> Sanja Fidler</a>, <a href="http://www.cs.toronto.edu/~urtasun/">Raquel Urtasun</a>, <a href="http://www.stat.ucla.edu/~yuille/">Alan Yuille</a></p>
             <p>IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2014</a>
           </div>
         </div>
@@ -633,10 +633,20 @@
 
     <a name="acknowledgements"></a>
     <div class="page-header"><h2 id="acknowledgements">Acknowledgements</h2></div>
-    <p>We would like to acknowledge the support by Implementation of Technologies for Identification, Behavior, and Location of Human based on Sensor Network Fusion Program through the Korean Ministry of Trade, Industry and Energy (Grant Number: 10041629). We would also like to thank National Science Foundation for grant 1317376 (Visual Cortex on Silicon. NSF Expedition in Computing).</p>
+    <p>We would like to acknowledge the support by Implementation of Technologies for Identification, Behavior, and Location of Human based on Sensor Network Fusion Program through the Korean Ministry of Trade, Industry and Energy (Grant Number: 10041629). We would also like to thank National Science Foundation for grant 1317376 (Visual Cortex on Silicon. NSF Expedition in Computing). We thank Viet Nguyen for coordinating and leading the efforts for cleaning up the annotations.</p>
     <p><a href="#"><span class="glyphicon glyphicon-arrow-up"></span> back to top</a></p>
 
   </div>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1498370; 
+var sc_invisible=1; 
+var sc_partition=13; 
+var sc_security="250b5be7"; 
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c14.statcounter.com/counter.php?sc_project=1498370&amp;java=0&amp;security=250b5be7&amp;invisible=1" alt="free stats" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
 
 </body>
 
